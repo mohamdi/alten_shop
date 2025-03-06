@@ -3,6 +3,7 @@ package com.alten.shop.service;
 import com.alten.shop.exception.NotFoundException;
 import com.alten.shop.model.entity.Product;
 import com.alten.shop.repository.ProductRepository;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public class ProductService {
         return repository.findAll();
     }
 
+    @PreAuthorize("@security.isAdmin(authentication)")
     public Product save(Product product) {
         return repository.save(product);
     }
@@ -28,6 +30,7 @@ public class ProductService {
                 .orElseThrow(() -> new NotFoundException("Product not found"));
     }
 
+    @PreAuthorize("@security.isAdmin(authentication)")
     public Product patch(Long id, Product newData) {
         Product product = findById(id);
         product.setCode(newData.getCode());
@@ -44,6 +47,7 @@ public class ProductService {
         return repository.save(product);
     }
 
+    @PreAuthorize("@security.isAdmin(authentication)")
     public void delete(Long id) {
         Product product = findById(id);
         repository.delete(product);

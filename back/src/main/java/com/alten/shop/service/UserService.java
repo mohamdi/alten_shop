@@ -6,7 +6,10 @@ import com.alten.shop.repository.UserRepository;
 import com.alten.shop.security.JwtProperties;
 import com.alten.shop.security.TokenUser;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -42,5 +45,24 @@ public class UserService {
 
     private boolean isValid(User user, String password) {
         return passwordEncoder.matches(password, user.getPassword());
+    }
+
+    private boolean userExists(String email) {
+        return repository.findByEmail(email).isPresent();
+    }
+
+    public void signup(@Valid User user) {
+        if (userExists(user.getEmail())) {
+            throw new IllegalArgumentException("Email is already used");
+        }
+        repository.save(user);
+    }
+
+    public User getConnectedUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth == null) throw new IllegalStateException("Couldn't get authentication object");
+        Optional<User> result = repository.findByEmail(auth.getName());
+        if (result.isEmpty()) throw new IllegalStateException("Connected user couldn't be found in database");
+        return result.get();
     }
 }

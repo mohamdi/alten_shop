@@ -63,4 +63,9 @@ public class UserPrincipal implements UserDetails {
         tokenUser.setPassword(null);
         return tokenUser;
     }
+
+    public boolean isAdmin(){
+        return user.getAdmin();
+    }
+
 }

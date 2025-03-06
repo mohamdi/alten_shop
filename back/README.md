@@ -43,3 +43,9 @@ The project structure is as follows:
                     └── shop
                         └── AltenShopApplicationTests.java
 ```
+
+# Instructions to run this app
+use the profile `local` to use postgresql database.
+edit the file application-local.properties to configure the database connection.
+
+You can find the postman collection in the root of the project.

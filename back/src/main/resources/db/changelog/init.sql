@@ -33,3 +33,29 @@ CREATE TABLE app_user
     created_at timestamp,
     updated_at timestamp
 );
+
+--changeset Mohamdi:init/cart_and_wishlist
+CREATE TABLE user_cart
+(
+    id bigint primary key NOT NULL,
+    user_id bigint NOT NULL,
+    product_id bigint NOT NULL,
+    quantity   int not null,
+    created_at timestamp,
+    updated_at timestamp,
+    FOREIGN KEY (user_id) REFERENCES app_user (id),
+    FOREIGN KEY (product_id) REFERENCES product (id),
+    unique (user_id, product_id)
+);
+
+CREATE TABLE user_wishlist
+(
+    id bigint primary key NOT NULL,
+    user_id bigint NOT NULL,
+    product_id bigint NOT NULL,
+    created_at timestamp,
+    updated_at timestamp,
+    FOREIGN KEY (user_id) REFERENCES app_user (id),
+    FOREIGN KEY (product_id) REFERENCES product (id),
+    unique (user_id, product_id)
+);
