@@ -34,3 +34,5 @@ out/
 /nbdist/
 /.nb-gradle/
 
+
+.qodo
