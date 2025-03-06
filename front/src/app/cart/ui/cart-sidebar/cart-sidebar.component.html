@@ -1,0 +1,7 @@
+<button pButton label="Cart" icon="pi pi-shopping-cart" class="p-button-rounded p-button-text"
+        (click)="toggleCart()"></button>
+
+<p-sidebar [(visible)]="displayCart" position="right" [modal]="false" [baseZIndex]="10000" [dismissible]="false">
+    <h3 class="p-mb-3">Your Cart</h3>
+    <app-cart></app-cart>
+</p-sidebar>

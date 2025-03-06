@@ -41,3 +41,4 @@ Thumbs.db
 
 # Mochawesome test report
 /cypress/report
+.qodo

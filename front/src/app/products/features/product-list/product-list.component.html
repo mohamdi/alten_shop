@@ -2,30 +2,32 @@
 
 <p-button label="Créer produit" (onClick)="onCreate()" class="block text-center"/>
 
-<p-dataView #dv [value]="products()">
-    <ng-template pTemplate="list" let-products>
-        @for (product of products; track product) {
-            <p-card class="block mb-2">
-                <span class="font-medium text-secondary text-sm">{{ product.category }}</span>
-                <div class="text-lg font-medium text-900 mt-2">{{ product.name }}</div>
-
-                <ng-template pTemplate="footer">
-                    <div class="flex gap-3 mt-1">
-                        <p-button label="Modifier" severity="secondary" (onClick)="onUpdate(product)"/>
-                        <p-button label="Supprimer" severity="danger" (onClick)="onDelete(product)" />
-                    </div>
-                </ng-template>
-            </p-card>
-        }
-    </ng-template>
-</p-dataView>
+<div class="card">
+    <p-dataView #dv [value]="products()" [layout]="'grid'" [rows]="6" [paginator]="true">
+        <ng-template pTemplate="grid" #grid let-items>
+            <div class="grid grid-cols-12 gap-4">
+                <div *ngFor="let product of items" class="col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-6 p-2">
+                    <p-card class="block mb-2">
+                        <app-product-card [product]="product"></app-product-card>
+                        <ng-template pTemplate="footer">
+                            <div class="flex gap-3 mt-1">
+                                <p-button label="Modifier" severity="secondary" (onClick)="onUpdate(product)"/>
+                                <p-button label="Supprimer" severity="danger" (onClick)="onDelete(product)"/>
+                            </div>
+                        </ng-template>
+                    </p-card>
+                </div>
+            </div>
+        </ng-template>
+    </p-dataView>
+</div>
 
 <p-dialog [(visible)]="isDialogVisible"
-    [style]="{ width: '50vw' }"
-    header="Ajout/Edition produit">
+          [style]="{ width: '50vw' }"
+          header="Ajout/Edition produit">
     <app-product-form
-        [product]="editedProduct()"
-        (save)="onSave($event)"
-        (cancel)="onCancel()"
+            [product]="editedProduct()"
+            (save)="onSave($event)"
+            (cancel)="onCancel()"
     />
 </p-dialog>

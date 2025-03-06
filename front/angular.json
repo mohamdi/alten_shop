@@ -29,7 +29,7 @@
             ],
             "styles": [
               "src/styles.scss",
-              "node_modules/primeflex/primeflex.css",
+              "node_modules/primeflex/primeflex.scss",
               {
                 "input": "src/styles/dark.css",
                 "bundleName": "mdc-dark-deeppurple",

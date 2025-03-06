@@ -1,17 +1,17 @@
-import { Injectable, inject, signal } from "@angular/core";
-import { Product } from "./product.model";
-import { HttpClient } from "@angular/common/http";
-import { catchError, Observable, of, tap } from "rxjs";
+import {inject, Injectable, signal} from "@angular/core";
+import {Product} from "./product.model";
+import {HttpClient} from "@angular/common/http";
+import {catchError, Observable, of, tap} from "rxjs";
 
 @Injectable({
     providedIn: "root"
-}) export class ProductsService {
+})
+export class ProductsService {
 
     private readonly http = inject(HttpClient);
     private readonly path = "/api/products";
-    
-    private readonly _products = signal<Product[]>([]);
 
+    private readonly _products = signal<Product[]>([]);
     public readonly products = this._products.asReadonly();
 
     public get(): Observable<Product[]> {

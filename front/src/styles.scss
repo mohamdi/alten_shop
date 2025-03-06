@@ -1,10 +1,10 @@
 /* PrimeNG */
-@import "~primeicons/primeicons.css";
-@import "~primeng/resources/primeng.min.css";
+@import "primeicons/primeicons.css";
+@import "primeng/resources/primeng.min.css";
 
 /* Quill */
-@import "~quill/dist/quill.core.css";
-@import "~quill/dist/quill.snow.css";
+@import "quill/dist/quill.core.css";
+@import "quill/dist/quill.snow.css";
 
 /* Custom SCSS */
 @import "variables";
@@ -53,7 +53,7 @@ body {
     display: none;
   }
 
-  .p-float-label input.p-filled~label {
+  .p-float-label input.p-filled ~ label {
     top: 0rem !important;
   }
 
@@ -77,4 +77,11 @@ body {
   display: inline-block;
   height: 14px !important;
   color: transparent;
+}
+
+.p-inputnumber-button {
+  width: 1rem !important;
+  height: 1rem !important;
+  padding: 0;
+  margin: 0;
 }

@@ -1,0 +1,28 @@
+<div class="p-card p-mb-3">
+    <ng-container *ngFor="let item of cartItems$ | async">
+        <p-card>
+            <ng-template pTemplate="header">
+                <img [src]="item.product.image" alt="{{ item.product.name }}" style="width: 150px; height: 150px;">
+            </ng-template>
+            <h4>{{ item.product.name }}</h4>
+            <p>{{ item.product.description }}</p>
+            <p>Price: ${{ item.product.price }}</p>
+            <div>
+                <p-inputNumber
+                        [(ngModel)]="item.quantity"
+                        (ngModelChange)="onQuantityChange(item.product.id, $event)"
+                        [min]="1"
+                        [showButtons]="true"
+                        mode="decimal"
+                        class="p-mb-2"
+                        [style]="{'width': '100px'}"/>
+            </div>
+            <button pButton icon="pi pi-trash" label="Remove" (click)="onRemoveItem(item.product.id)" class="p-button-danger"></button>
+        </p-card>
+    </ng-container>
+</div>
+
+<div class="p-card p-p-3">
+    <h3>Total: ${{ totalAmount$ | async }}</h3>
+    <button pButton label="Clear Cart" icon="pi pi-times" class="p-button-danger" (click)="onClearCart()"></button>
+</div>
